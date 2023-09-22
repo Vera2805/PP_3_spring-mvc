@@ -21,9 +21,6 @@ public class CarController {
 
     }
 
-    public CarController() {
-
-    }
 
     @GetMapping(value = "/")
     public String getCars(ModelMap model, @RequestParam(name = "count", defaultValue = "0", required = false) Integer count) {
