@@ -1,5 +1,6 @@
 package web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class CarController {
+private final CarService carService;
 
-    @GetMapping(value = "/")
+@Autowired
+    public CarController (CarService carService) {
+    this.carService = carService;
+}
+
+   @GetMapping(value = "/")
     public String getCars(ModelMap model, @RequestParam(name = "count", defaultValue = "0", required = false) Integer count) {
         List<Car> cars;
         if (count == 0 || count >= 5) {
