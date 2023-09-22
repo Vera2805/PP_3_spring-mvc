@@ -1,36 +1,38 @@
 package web.service;
 
-import org.springframework.stereotype.Controller;
+import dao.CarDao;
 import org.springframework.stereotype.Service;
 import web.model.Car;
-import web.service.CarService;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+
 @Service
 public class CarServiceImpl implements CarService {
-    private List<Car> cars = new ArrayList<>();
+    //private List<Car> cars = new ArrayList<>();
 
-    public CarServiceImpl() {
-        cars.add(new Car("Ford", "Mustang", 1994));
-        cars.add(new Car("Mini", "Cooper", 2020));
-        cars.add(new Car("Dodge", "Shadow", 2013));
-        cars.add(new Car("Land Rover", "Discovery", 2017));
-        cars.add(new Car("Pontiac", "Vibe", 2005));
+    private CarDao carDao;
+
+    public CarServiceImpl(CarDao carDao) {
+        this.carDao = carDao;
+
     }
+    public CarServiceImpl () {
 
-    @Override
-    public List<Car> getAllCars() {
-        return cars;
     }
 
 
-    @Override
-    public List<Car> getCars(int count) {
-        return cars.subList(0, (Integer) count);
-    }
-}
+        public List<Car> getAllCars () {
+            return carDao.getAllCars();
+        }
 
+        public List<Car> getCars ( int count){
+            if (count == 0 || count >= 5) {
+                return carDao.getAllCars();
+            } else {
+                return carDao.getCars(count);
+                // return cars.subList(0, (Integer) count);
+            }
+        }
+    }
 
