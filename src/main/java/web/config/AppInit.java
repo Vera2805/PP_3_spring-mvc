@@ -1,6 +1,9 @@
 package web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import web.dao.UserDao;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
